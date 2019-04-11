@@ -6,10 +6,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "played")
 public class Played implements Serializable {
-    @ManyToOne
+//    @ManyToOne
     @Column(name = "GameID")
     private int gameID;
-    @ManyToOne
+//    @ManyToOne
     @Column(name = "UserID")
     private int userID;
     @Column(name = "Points")
