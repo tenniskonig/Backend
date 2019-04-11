@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,23 +20,19 @@ public class User {
     @JsonIgnore
     private String password;
 
-    @Column(name = "first_name")
+    @Column(name = "vorname")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "nachname")
     private String lastName;
 
-    /**
-     * Roles are being eagerly loaded here because
-     * they are a fairly small collection of items for this example.
-     */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns
-            = @JoinColumn(name = "user_id",
-            referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id",
-                    referencedColumnName = "id"))
-    private List<Role> roles;
+    @Column(name = "admin")
+    private boolean admin;
+
+    @Column(name = "geschlechtw")
+    private boolean geschlechtw;
+
+
 
     public Long getId() {
         return id;
@@ -78,12 +74,20 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public boolean isAdmin() {
+        return admin;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public boolean isGeschlechtw() {
+        return geschlechtw;
+    }
+
+    public void setGeschlechtw(boolean geschlechtw) {
+        this.geschlechtw = geschlechtw;
     }
 }
 

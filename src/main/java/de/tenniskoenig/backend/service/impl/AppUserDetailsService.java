@@ -28,9 +28,11 @@ public class AppUserDetailsService implements UserDetailsService {
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-        });
+        authorities.add(new SimpleGrantedAuthority("STANDARD_USER"));
+        if(user.isAdmin())
+        {
+            authorities.add(new SimpleGrantedAuthority("ADMIN_USER"));
+        }
 
         UserDetails userDetails = new org.springframework.security.core.userdetails.
                 User(user.getUsername(), user.getPassword(), authorities);

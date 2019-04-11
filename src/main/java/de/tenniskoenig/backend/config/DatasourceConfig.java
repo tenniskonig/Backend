@@ -30,7 +30,7 @@ public class DatasourceConfig {
         EmbeddedDatabase dataSource = builder
                 .setType(EmbeddedDatabaseType.H2)
                 .addScript("sql-scripts/schema.sql")
-                .addScript("sql-scripts/data.sql")
+//                .addScript("sql-scripts/data.sql")
                 .build();
 
         return dataSource;
