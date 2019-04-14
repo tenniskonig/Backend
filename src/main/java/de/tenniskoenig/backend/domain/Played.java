@@ -8,16 +8,16 @@ import java.io.Serializable;
 public class Played implements Serializable {
 //    @ManyToOne
     @Column(name = "GameID")
-    private int gameID;
+    private long gameID;
 //    @ManyToOne
     @Column(name = "UserID")
-    private int userID;
+    private long userID;
     @Column(name = "Points")
     private int points;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "playedID")
-    private int playedID;
+    private long playedID;
 
     public Played()    { }
 
@@ -27,7 +27,7 @@ public class Played implements Serializable {
         this.playedID = playedID;
     }
 
-    public int getGameID() {
+    public long getGameID() {
         return gameID;
     }
 
@@ -35,7 +35,7 @@ public class Played implements Serializable {
         this.gameID = gameID;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 
@@ -43,7 +43,7 @@ public class Played implements Serializable {
         this.userID = userID;
     }
 
-    public int getPoints() {
+    public long getPoints() {
         return points;
     }
 
@@ -51,7 +51,7 @@ public class Played implements Serializable {
         this.points = points;
     }
 
-    public int getPlayedID() {
+    public long getPlayedID() {
         return playedID;
     }
 
