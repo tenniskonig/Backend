@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -28,5 +29,10 @@ public class UserController {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));;
         return ResponseEntity.ok().body(user);
+    }
+
+    @PostMapping("/player")
+    public User createUser(@Valid @RequestBody User user) {
+        return userRepository.save(user);
     }
 }
