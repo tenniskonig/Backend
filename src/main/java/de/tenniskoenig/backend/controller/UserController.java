@@ -8,22 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value ="/users", method = RequestMethod.GET)
+    @RequestMapping(value ="/player", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN_USER')")
     public Iterable<User> getUsers(){
         return userRepository.findAll();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/player/{id}")
     @PreAuthorize("hasAuthority('ADMIN_USER')")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
-        User user = userRepository.findUserById(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));;
         return ResponseEntity.ok().body(user);
     }
 }
