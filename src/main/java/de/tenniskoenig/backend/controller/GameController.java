@@ -5,12 +5,11 @@ import de.tenniskoenig.backend.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import de.tenniskoenig.backend.exception.ResourceNotFoundException;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -37,5 +36,11 @@ public class GameController {
     @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
     public Iterable<Game> getGameByPlayerId(@PathVariable(value = "Id") Long playerId) throws ResourceNotFoundException {
         return gameRepository.findAllByPlayer1Team1OrPlayer2Team2OrPlayer3Team1OrPlayer4Team2(playerId, playerId, playerId, playerId);
+    }
+
+
+    @PostMapping("/match")
+    public Game createGame(@Valid @RequestBody Game game) {
+        return gameRepository.save(game);
     }
 }

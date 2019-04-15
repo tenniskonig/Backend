@@ -12,5 +12,4 @@ public interface GameRepository extends JpaRepository<Game, Long> {
      * @return All games by these Users
      */
     Iterable<Game> findAllByPlayer1Team1OrPlayer2Team2OrPlayer3Team1OrPlayer4Team2(Long playerId1, Long playerId2, Long playerId3, Long playerId4);
-
 }
