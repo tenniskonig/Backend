@@ -9,9 +9,9 @@ public class Played implements Serializable {
 //    @ManyToOne
     @Column(name = "GameID")
     private long gameID;
-//    @ManyToOne
-    @Column(name = "UserID")
-    private long userID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UserID")
+    private User userID;
     @Column(name = "Points")
     private int points;
     @Id
@@ -21,7 +21,7 @@ public class Played implements Serializable {
 
     public Played()    { }
 
-    public Played(int userID, int points, int playedID) {
+    public Played(User userID, int points, int playedID) {
         this.userID = userID;
         this.points = points;
         this.playedID = playedID;
@@ -35,11 +35,11 @@ public class Played implements Serializable {
         this.gameID = gameID;
     }
 
-    public long getUserID() {
+    public User getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(User userID) {
         this.userID = userID;
     }
 

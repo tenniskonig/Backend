@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -53,6 +54,9 @@ public class User {
 
     @Column(name = "geschlechtw")
     private boolean geschlechtw;
+
+    @OneToMany(mappedBy = "userID")
+    private List<Played> playedList = new ArrayList<Played>();
 
 
 
