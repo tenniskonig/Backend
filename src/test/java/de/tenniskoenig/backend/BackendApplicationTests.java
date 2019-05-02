@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.logging.Logger;
 
 import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.requestContentType;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -28,7 +30,22 @@ public class BackendApplicationTests {
 	public void setUp() throws Exception {
 		RestAssured.port = port;
 	}
-	public void login(String username, String password) throws JSONException {
+
+
+	@Test
+	public void authFail() throws JSONException {
+		boolean temp = login("sven.haala", "jwtpss");
+		assertEquals(temp, false);
+	}
+
+	@Test
+	public void authSuccess() throws JSONException {
+		boolean temp = login("sven.haala", "jwtpass");
+		assertEquals(temp, true);
+	}
+
+
+	private boolean login(String username, String password) {
 		logger.info("Port is: "+ port);
 		logger.info("Getting OAuth Token from server - {}"+ RestAssured.baseURI);
 		Response response =
@@ -39,9 +56,22 @@ public class BackendApplicationTests {
 				.formParam("scope", "read").when()
 				.post("/oauth/token");
 
-		JSONObject jsonObject = new JSONObject(response.getBody().asString());
-		accessToken = jsonObject.get("access_token").toString();
-		logger.info("Oauth Token for " + username + " is " + accessToken);
+		JSONObject jsonObject = null;
+		try {
+			if(response.getStatusCode()==200){
+				jsonObject = new JSONObject(response.getBody().asString());
+				accessToken = jsonObject.get("access_token").toString();
+				logger.info("Oauth Token for " + username + " is " + accessToken);
+				return true;
+			}
+			if(response.getStatusCode()==400)
+			{
+				return false;
+			}
+		} catch (JSONException e) {
+
+		}
+		return false;
 	}
 }
 
