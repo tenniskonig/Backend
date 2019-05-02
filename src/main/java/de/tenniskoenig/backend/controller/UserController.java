@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -17,9 +16,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value ="/player", method = RequestMethod.GET)
+    @RequestMapping(value = "/player", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN_USER')or hasAuthority('STANDARD_USER')")
-    public Iterable<User> getUsers(){
+    public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
@@ -27,7 +26,8 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN_USER')or hasAuthority('STANDARD_USER')")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));;
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+        ;
         return ResponseEntity.ok().body(user);
     }
 
