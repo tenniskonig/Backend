@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.requestContentType;
+import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -29,20 +30,16 @@ public class BackendApplicationTests {
 	@Before
 	public void setUp() throws Exception {
 		RestAssured.port = port;
+		login("sven.haala", "jwtpass");
 	}
 
 
 	@Test
-	public void authFail() throws JSONException {
-		boolean temp = login("sven.haala", "jwtpss");
-		assertEquals(temp, false);
-	}
-
-	@Test
-	public void authSuccess() throws JSONException {
-		boolean temp = login("sven.haala", "jwtpass");
-		assertEquals(temp, true);
-	}
+	public void player(){
+		given().auth().oauth2(accessToken)
+				.get("/api/player")
+				.then().statusCode(200);
+}
 
 
 	private boolean login(String username, String password) {
