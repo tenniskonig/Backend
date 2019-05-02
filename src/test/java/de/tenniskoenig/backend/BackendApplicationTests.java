@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.logging.Logger;
 
 import static com.jayway.restassured.RestAssured.given;
-import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -22,7 +21,8 @@ public class BackendApplicationTests {
     @LocalServerPort
     private int port;
 
-    String accessToken;
+    public static String accessToken;
+
     Logger logger = Logger.getLogger(BackendApplicationTests.class.getName());
 
     @Before
@@ -31,28 +31,8 @@ public class BackendApplicationTests {
         login("sven.haala", "jwtpass");
     }
 
-
     @Test
-    public void playerAll() {
-        given().auth().oauth2(accessToken)
-                .get("/api/player")
-                .then().statusCode(200);
-    }
-
-    @Test
-    public void playerId() {
-        given().auth().oauth2(accessToken)
-                .get("/api/player/id/1")
-                .then().statusCode(200);
-    }
-
-    Response player;
-
-    @Test
-    public void player() {
-        player = given().auth().oauth2(accessToken)
-                .get("/api/player/name/sven.haala");
-        assertEquals(player.getStatusCode(), 200);
+    public void tests() {
     }
 
     private boolean login(String username, String password) {
