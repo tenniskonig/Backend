@@ -18,13 +18,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping(value ="/player", method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ADMIN_USER')or hasAuthority('STANDARD_USER')")
     public Iterable<User> getUsers(){
         return userRepository.findAll();
     }
 
     @GetMapping("/player/id/{id}")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ADMIN_USER')or hasAuthority('STANDARD_USER')")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new ResourceNotFoundException("User", "id", userId));;
@@ -32,12 +32,11 @@ public class UserController {
     }
 
     @GetMapping("/player/name/{username}")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ADMIN_USER')or hasAuthority('STANDARD_USER')")
     public ResponseEntity<User> getUserByUserName(@PathVariable(value = "username") String userName) throws ResourceNotFoundException {
         User user = userRepository.findByUsername(userName);
         return ResponseEntity.ok().body(user);
     }
-
 
     @PostMapping("/player")
     public User createUser(@Valid @RequestBody User user) {
