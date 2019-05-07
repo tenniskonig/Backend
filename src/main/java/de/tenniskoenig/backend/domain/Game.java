@@ -1,6 +1,5 @@
 package de.tenniskoenig.backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
@@ -32,7 +31,8 @@ public class Game implements Serializable {
     @Column(name = "playTime")
     private Time playTime;
 
-    public Game(){}
+    public Game() {
+    }
 
     public Game(int player1Team1, int player2Team2, int player3Team1, int player4Team2, String results, int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
         this.player1Team1 = player1Team1;

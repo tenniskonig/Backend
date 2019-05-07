@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "played")
 public class Played implements Serializable {
-//    @ManyToOne
+    //    @ManyToOne
     @Column(name = "GameID")
     private long gameID;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -19,7 +19,8 @@ public class Played implements Serializable {
     @Column(name = "playedID")
     private long playedID;
 
-    public Played()    { }
+    public Played() {
+    }
 
     public Played(User userID, int points, int playedID) {
         this.userID = userID;
