@@ -1,11 +1,6 @@
 package de.tenniskoenig.backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,10 +25,10 @@ public class User {
     @JsonSetter
     private String password;
 
-    @Column(name = "vorname")
+    @Column(name = "firstName")
     private String firstName;
 
-    @Column(name = "nachname")
+    @Column(name = "lastName")
     private String lastName;
 
     @Column(name = "admin")
@@ -43,7 +38,7 @@ public class User {
     private boolean geschlechtw;
 
     @OneToMany(mappedBy = "userID")
-    private List<Played> playedList = new ArrayList<Played>();
+    private List<Played> playedList = new ArrayList<>();
 
 
     public Long getId() {
