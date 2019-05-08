@@ -40,6 +40,19 @@ public class UserController {
 
     @PostMapping("/player")
     public User createUser(@Valid @RequestBody User user) {
+
+        String tusername = user.getFirstName().toLowerCase() + "." + user.getLastName().toLowerCase();
+        user.setUsername(tusername);
+        if(userRepository.findByUsername(tusername)!=null){
+            int k = 1;
+            while(true){
+                if(userRepository.findByUsername(tusername+k)==null){
+                    user.setUsername(tusername+k);
+                    break;
+                }
+                k++;
+            }
+        }
         return userRepository.save(user);
     }
 }
