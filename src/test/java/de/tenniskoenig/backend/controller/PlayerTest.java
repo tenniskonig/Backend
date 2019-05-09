@@ -70,7 +70,7 @@ public class PlayerTest extends BackendApplicationTests {
     }
 
     @Test
-    public void doubleUsername() throws JSONException {
+    public void createUser2() throws JSONException {
         RequestSpecification request = given().auth().oauth2(accessToken);
         request.header("Content-Type", "application/json");
         request.body(getUser().toString());
@@ -78,6 +78,18 @@ public class PlayerTest extends BackendApplicationTests {
         assertEquals(response.statusCode(), 200);
         User user = response.getBody().as(User.class);
         assertEquals(user.getUsername(), vorname.toLowerCase() + "." + nachname.toLowerCase() + 1);
+        assertEquals(user.getFirstName(), vorname);
+    }
+
+    @Test
+    public void createUser3() throws JSONException {
+        RequestSpecification request = given().auth().oauth2(accessToken);
+        request.header("Content-Type", "application/json");
+        request.body(getUser().toString());
+        Response response = request.post("/api/player");
+        assertEquals(response.statusCode(), 200);
+        User user = response.getBody().as(User.class);
+        assertEquals(user.getUsername(), vorname.toLowerCase() + "." + nachname.toLowerCase() + 2);
         assertEquals(user.getFirstName(), vorname);
     }
 }
