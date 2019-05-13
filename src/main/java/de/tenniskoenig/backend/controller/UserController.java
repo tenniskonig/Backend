@@ -38,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PostMapping("/player")
+    @PostMapping("/player/create")
     public User createUser(@Valid @RequestBody User user) {
 
         String tusername = user.getFirstName().toLowerCase() + "." + user.getLastName().toLowerCase();
