@@ -164,8 +164,8 @@
  		        <configuration>
 		          <images>
 			            <image>
-			              <name>springboot-jwt</name>
-			              <alias>springboot-jwt</alias>
+			              <name>tenniskoenig</name>
+			              <alias>tenniskoenig</alias>
 			              <build>
 			                <filter>@</filter>
 			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
