@@ -6,6 +6,7 @@ import de.tenniskoenig.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,8 +39,13 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/player/create")
     public User createUser(@Valid @RequestBody User user) {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         String tusername = user.getFirstName().toLowerCase() + "." + user.getLastName().toLowerCase();
         user.setUsername(tusername);
