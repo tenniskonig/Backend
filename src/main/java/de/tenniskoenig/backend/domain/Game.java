@@ -11,21 +11,21 @@ public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long gameID;
+    private int gameID;
     @Column(name = "player1Team1")
-    private long player1Team1;
+    private int player1Team1;
     @Column(name = "player2Team2")
-    private long player2Team2;
+    private int player2Team2;
     @Column(name = "player3Team1")
-    private long player3Team1;
+    private int player3Team1;
     @Column(name = "player4Team2")
-    private long player4Team2;
+    private int player4Team2;
     @Column(name = "results")
     private String results;
     @Column(name = "gameSetTeam1")
-    private long gameSetTeam1;
+    private int gameSetTeam1;
     @Column(name = "gameSetTeam2")
-    private long gameSetTeam2;
+    private int gameSetTeam2;
     @Column(name = "gameDate")
     private Date gameDate;
     @Column(name = "playTime")
@@ -56,7 +56,7 @@ public class Game implements Serializable {
         this.playTime = playTime;
     }
 
-    public long getGameID() {
+    public int getGameID() {
         return gameID;
     }
 
@@ -64,7 +64,7 @@ public class Game implements Serializable {
         this.gameID = gameID;
     }
 
-    public long getPlayer1Team1() {
+    public int getPlayer1Team1() {
         return player1Team1;
     }
 
@@ -72,7 +72,7 @@ public class Game implements Serializable {
         this.player1Team1 = player1Team1;
     }
 
-    public long getPlayer2Team2() {
+    public int getPlayer2Team2() {
         return player2Team2;
     }
 
@@ -80,7 +80,7 @@ public class Game implements Serializable {
         this.player2Team2 = player2Team2;
     }
 
-    public long getPlayer3Team1() {
+    public int getPlayer3Team1() {
         return player3Team1;
     }
 
@@ -88,7 +88,7 @@ public class Game implements Serializable {
         this.player3Team1 = player3Team1;
     }
 
-    public long getPlayer4Team2() {
+    public int getPlayer4Team2() {
         return player4Team2;
     }
 
@@ -104,7 +104,7 @@ public class Game implements Serializable {
         this.results = results;
     }
 
-    public long getGameSetTeam1() {
+    public int getGameSetTeam1() {
         return gameSetTeam1;
     }
 
@@ -112,7 +112,7 @@ public class Game implements Serializable {
         this.gameSetTeam1 = gameSetTeam1;
     }
 
-    public long getGameSetTeam2() {
+    public int getGameSetTeam2() {
         return gameSetTeam2;
     }
 

@@ -17,7 +17,7 @@ public class Played implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "playedID")
-    private long playedID;
+    private int playedID;
 
     public Played() {
     }
@@ -52,7 +52,7 @@ public class Played implements Serializable {
         this.points = points;
     }
 
-    public long getPlayedID() {
+    public int getPlayedID() {
         return playedID;
     }
 
