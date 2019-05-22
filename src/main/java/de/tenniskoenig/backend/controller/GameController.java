@@ -24,7 +24,7 @@ public class GameController {
 
     @GetMapping("/match/{id}")
     @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
-    public ResponseEntity<Game> getGameById(@PathVariable(value = "id") Long gameId) throws ResourceNotFoundException {
+    public ResponseEntity<Game> getGameById(@PathVariable(value = "id") int gameId) throws ResourceNotFoundException {
         Game user = gameRepository.findById(gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Game", "id", gameId));
         return ResponseEntity.ok().body(user);
@@ -33,7 +33,7 @@ public class GameController {
 
     @GetMapping("/match/byplayer/{Id}")
     @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
-    public Iterable<Game> getGameByPlayerId(@PathVariable(value = "Id") Long playerId) throws ResourceNotFoundException {
+    public Iterable<Game> getGameByPlayerId(@PathVariable(value = "Id") int playerId) throws ResourceNotFoundException {
         return gameRepository.findAllByPlayer1Team1OrPlayer2Team2OrPlayer3Team1OrPlayer4Team2(playerId, playerId, playerId, playerId);
     }
 

@@ -16,9 +16,9 @@ public class Game implements Serializable {
     @Column(name = "id")
     private long gameID;
     @Column(name = "player1Team1", nullable = false)
-    private long player1Team1;
+    private int player1Team1;
     @Column(name = "player2Team2", nullable = false)
-    private long player2Team2;
+    private int player2Team2;
     @Column(name = "player3Team1")
     private Integer player3Team1;
     @Column(name = "player4Team2")
@@ -38,7 +38,7 @@ public class Game implements Serializable {
     public Game() {
     }
 
-    public Game(long player1Team1, long player2Team2, Date gameDate, Time playTime) {
+    public Game(int player1Team1, int player2Team2, Date gameDate, Time playTime) {
         this.player1Team1 = player1Team1;
         this.player2Team2 = player2Team2;
         this.gameDate = gameDate;
@@ -75,7 +75,7 @@ public class Game implements Serializable {
         this.gameID = gameID;
     }
 
-    public long getPlayer1Team1() {
+    public int getPlayer1Team1() {
         return player1Team1;
     }
 
@@ -83,7 +83,7 @@ public class Game implements Serializable {
         this.player1Team1 = player1Team1;
     }
 
-    public long getPlayer2Team2() {
+    public int getPlayer2Team2() {
         return player2Team2;
     }
 
