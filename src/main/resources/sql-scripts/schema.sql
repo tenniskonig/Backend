@@ -19,11 +19,11 @@ CREATE TABLE game
     player2Team2 int(11)     NOT NULL,
     player3Team1 int(11) DEFAULT NULL,
     player4Team2 int(11) DEFAULT NULL,
-    results      varchar(25) NOT NULL,
-    gameSetTeam1 int(11)     NOT NULL,
-    gameSetTeam2 int(11) DEFAULT NULL,
-    gameDate     date    DEFAULT NULL,
-    playTime     time    DEFAULT NULL,
+    results      varchar(25),
+    gameSetTeam1 int(11),
+    gameSetTeam2 int(11),
+    gameDate     date NOT NULL,
+    playTime     time,
     PRIMARY KEY (id)
 );
 
@@ -56,13 +56,13 @@ VALUES (1, 'Sven', 'Haala', 0, 1, 'sven.haala', '$2a$10$l9iGY8YEjstoKM.TFz17aOnT
 
 INSERT INTO game (id, player1Team1, player2Team2, player3Team1, player4Team2, results, gameSetTeam1, gameSetTeam2,
                   gameDate, playTime)
-VALUES (11, 1, 2, 0, 0, '1:2;1:6;:', 0, 2, '2018-12-12', '00:00:00'),
-       (12, 1, 2, 0, 0, '5:1;4:6;3:1', 2, 1, '2018-12-12', '00:00:00'),
-       (13, 2, 1, 0, 0, ':;:;:', 0, 0, '2018-12-12', '01:00:00'),
-       (14, 2, 1, 0, 0, ':;:;:', 0, 0, '2018-12-12', '00:15:00'),
-       (15, 2, 1, 0, 0, ':;:;:', 0, 0, '2018-12-12', '00:30:00'),
-       (16, 2, 1, 0, 0, ':;:;:', 0, 0, '2018-12-12', '00:15:00'),
-       (17, 2, 1, 0, 0, ':;:;:', 0, 0, '2018-12-12', '00:45:00');
+VALUES (11, 1, 2, NULL, NULL, '1:2;1:6;:', 0, 2, '2018-12-12', '00:00:00'),
+       (12, 1, 2, NULL, NULL, '5:1;4:6;3:1', 2, 1, '2018-12-12', '00:00:00'),
+       (13, 2, 1, NULL, NULL, NULL, NULL, NULL, '2018-12-12', '01:00:00'),
+       (14, 2, 1, NULL, NULL, NULL, NULL, NULL, '2018-12-12', '00:15:00'),
+       (15, 2, 1, NULL, NULL, NULL, NULL, NULL, '2018-12-12', '00:30:00'),
+       (16, 2, 1, NULL, NULL, NULL, NULL, NULL, '2018-12-12', '00:15:00'),
+       (17, 2, 1, NULL, NULL, NULL, NULL, NULL, '2018-12-12', '00:45:00');
 
 INSERT INTO played (playedID, GameID, UserID, Points)
 VALUES (15, 11, 1, 9),

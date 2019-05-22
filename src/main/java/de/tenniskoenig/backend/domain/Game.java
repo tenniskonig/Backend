@@ -1,6 +1,9 @@
 package de.tenniskoenig.backend.domain;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
@@ -12,26 +15,34 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long gameID;
-    @Column(name = "player1Team1")
+    @Column(name = "player1Team1", nullable = false)
     private long player1Team1;
-    @Column(name = "player2Team2")
+    @Column(name = "player2Team2", nullable = false)
     private long player2Team2;
     @Column(name = "player3Team1")
-    private long player3Team1;
+    private Integer player3Team1;
     @Column(name = "player4Team2")
-    private long player4Team2;
-    @Column(name = "results")
+    private Integer player4Team2;
+    @Column(name = "results", nullable = true)
     private String results;
-    @Column(name = "gameSetTeam1")
-    private long gameSetTeam1;
-    @Column(name = "gameSetTeam2")
-    private long gameSetTeam2;
+    @Column(name = "gameSetTeam1", nullable = true)
+    private Integer gameSetTeam1;
+    @Column(name = "gameSetTeam2", nullable = true)
+    private Integer gameSetTeam2;
     @Column(name = "gameDate")
     private Date gameDate;
     @Column(name = "playTime")
     private Time playTime;
 
+
     public Game() {
+    }
+
+    public Game(long player1Team1, long player2Team2, Date gameDate, Time playTime) {
+        this.player1Team1 = player1Team1;
+        this.player2Team2 = player2Team2;
+        this.gameDate = gameDate;
+        this.playTime = playTime;
     }
 
     public Game(int player1Team1, int player2Team2, int player3Team1, int player4Team2, String results, int gameSetTeam1, int gameSetTeam2, Date gameDate, Time playTime) {
@@ -80,19 +91,19 @@ public class Game implements Serializable {
         this.player2Team2 = player2Team2;
     }
 
-    public long getPlayer3Team1() {
+    public Integer getPlayer3Team1() {
         return player3Team1;
     }
 
-    public void setPlayer3Team1(int player3Team1) {
+    public void setPlayer3Team1(Integer player3Team1) {
         this.player3Team1 = player3Team1;
     }
 
-    public long getPlayer4Team2() {
+    public Integer getPlayer4Team2() {
         return player4Team2;
     }
 
-    public void setPlayer4Team2(int player4Team2) {
+    public void setPlayer4Team2(Integer player4Team2) {
         this.player4Team2 = player4Team2;
     }
 
@@ -104,19 +115,19 @@ public class Game implements Serializable {
         this.results = results;
     }
 
-    public long getGameSetTeam1() {
+    public Integer getGameSetTeam1() {
         return gameSetTeam1;
     }
 
-    public void setGameSetTeam1(int gameSetTeam1) {
+    public void setGameSetTeam1(Integer gameSetTeam1) {
         this.gameSetTeam1 = gameSetTeam1;
     }
 
-    public long getGameSetTeam2() {
+    public Integer getGameSetTeam2() {
         return gameSetTeam2;
     }
 
-    public void setGameSetTeam2(int gameSetTeam2) {
+    public void setGameSetTeam2(Integer gameSetTeam2) {
         this.gameSetTeam2 = gameSetTeam2;
     }
 
