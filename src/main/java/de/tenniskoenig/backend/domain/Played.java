@@ -1,10 +1,14 @@
 package de.tenniskoenig.backend.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import de.tenniskoenig.backend.controller.Custom;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "played")
+@JsonSerialize(using = Custom.class)
 public class Played implements Serializable {
     //    @ManyToOne
     @Column(name = "GameID")

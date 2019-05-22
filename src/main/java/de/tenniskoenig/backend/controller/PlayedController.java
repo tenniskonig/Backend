@@ -1,5 +1,6 @@
 package de.tenniskoenig.backend.controller;
 
+import de.tenniskoenig.backend.domain.Highscore;
 import de.tenniskoenig.backend.domain.Played;
 import de.tenniskoenig.backend.exception.ResourceNotFoundException;
 import de.tenniskoenig.backend.repository.PlayedRepository;
@@ -18,7 +19,15 @@ public class PlayedController {
 
     @GetMapping("/highscore")
     @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
-    public Iterable<Played> getHighscore() throws ResourceNotFoundException {
-        return playedRepository.getHighscore();
+    public Iterable<Highscore> getHighscore() throws ResourceNotFoundException {
+//        Iterable<Played> playeds =
+                return playedRepository.getHighscore();
+//        Iterable<Highscore> highscores;
+//        for(Played played:playeds){
+//            Highscore highscore = new Highscore();
+//            highscore.setFirstName(played.getUserID().getFirstName());
+//            highscore.setLastName(played.getUserID().getLastName());
+//            highscore.setGames(played.getPoints());
+//        }
     }
 }
