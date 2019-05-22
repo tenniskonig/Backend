@@ -27,7 +27,7 @@
 	    <tomcat.port>9081</tomcat.port>
 	    <tomcat.ip>127.0.0.1</tomcat.ip>
 	    <file>readme</file>
-			<docker.image.prefix>springio</docker.image.prefix>
+        <docker.image.prefix>springio</docker.image.prefix>
 
 	</properties>
 
