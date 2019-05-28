@@ -2,6 +2,7 @@ package de.tenniskoenig.backend.controller;
 
 import de.tenniskoenig.backend.domain.User;
 import de.tenniskoenig.backend.exception.ResourceNotFoundException;
+import de.tenniskoenig.backend.factory.UserFactory;
 import de.tenniskoenig.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.nio.file.attribute.UserDefinedFileAttributeView;
 
 @RestController
 @RequestMapping("/api")
@@ -45,20 +47,24 @@ public class UserController {
     @PostMapping("/player/create")
     public User createUser(@Valid @RequestBody User user) {
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        UserFactory.createNewObject();
+        UserFactory.setPassword(passwordEncoder.encode(user.getPassword()));
 
         String tusername = user.getFirstName().toLowerCase() + "." + user.getLastName().toLowerCase();
-        user.setUsername(tusername);
+        UserFactory.setUsername(tusername);
         if(userRepository.findByUsername(tusername)!=null){
             int k = 1;
             while(true){
                 if(userRepository.findByUsername(tusername+k)==null){
-                    user.setUsername(tusername+k);
+                    UserFactory.setUsername(tusername+k);
                     break;
                 }
                 k++;
             }
         }
-        return userRepository.save(user);
+        UserFactory.setFirstName(user.getFirstName());
+        UserFactory.setLastName(user.getLastName());
+        UserFactory.setGeschlecht(user.isGeschlechtw());
+        return userRepository.save(UserFactory.getObject());
     }
 }
