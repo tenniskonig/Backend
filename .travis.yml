@@ -12,5 +12,5 @@ script:
     - $HOME/.m2
 after_script:
   - docker build -t chsldz/tenniskoenig .
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - echo "$DOCKER_PASSWORD" | docker login -u="$DOCKER_USERNAME" --password-stdin
   - docker push chsldz/tenniskoenig
