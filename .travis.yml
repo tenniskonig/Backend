@@ -10,7 +10,7 @@ install:
 script:
   - mvn clean test jacoco:report coveralls:report
     - $HOME/.m2
-deploy:
+after_script:
   - docker build -t chsldz/tenniskoenig .
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push chsldz/tenniskoenig
