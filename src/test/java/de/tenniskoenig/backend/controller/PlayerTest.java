@@ -33,7 +33,7 @@ public class PlayerTest extends BackendApplicationTests {
                 .get("/api/player/id/1");
         assertEquals(player.getStatusCode(), 200);
         User user = player.as(User.class);
-        assertEquals(user.getId().intValue(), 1);
+        assertEquals(user.getId(), 1);
     }
 
     @Test

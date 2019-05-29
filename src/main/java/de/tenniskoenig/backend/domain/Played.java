@@ -6,33 +6,33 @@ import java.io.Serializable;
 @Entity
 @Table(name = "played")
 public class Played implements Serializable {
-    //    @ManyToOne
-    @Column(name = "GameID")
-    private long gameID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "playedID")
+    private int playedID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GameID")
+    private Game gameID;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UserID")
     private User userID;
     @Column(name = "Points")
     private int points;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "playedID")
-    private int playedID;
 
     public Played() {
     }
 
-    public Played(User userID, int points, int playedID) {
+    public Played(User userID, int points, Game gameID) {
         this.userID = userID;
         this.points = points;
-        this.playedID = playedID;
+        this.gameID = gameID;
     }
 
-    public long getGameID() {
+    public Game getGameID() {
         return gameID;
     }
 
-    public void setGameID(int gameID) {
+    public void setGameID(Game gameID) {
         this.gameID = gameID;
     }
 

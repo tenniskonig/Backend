@@ -47,31 +47,61 @@ public class GameController {
     }
 
 
-    private void createPlayer(int gameID, int userID, int points) {
+    private void createPlayer(Game game, int userID, int points) {
         Played played = new Played();
-        played.setGameID(gameID);
+        played.setGameID(game);
         played.setUserID(userRepository.findById(userID));
         played.setPoints(points);
     }
 
     @PostMapping("/match")
     public Game createGame(@Valid @RequestBody Game game) {
+        game = gameRepository.save(game);
+        int points = 0;
+        if (game.getPlayTime() != null) {
+            points = getPoints(game.getPlayTime().getMinutes(), game.getPlayTime().getHours());
+        }
 
+        if (game.getPlayer1Team1() != 0) {
+            Played played = createPlayed(game, game.getPlayer1Team1(), points);
+            playedRepository.save(played);
+        }
+        if (game.getPlayer2Team2() != 0) {
+            Played played = createPlayed(game, game.getPlayer2Team2(), points);
+            playedRepository.save(played);
+        }
+        if (game.getPlayer3Team1() != 0) {
+            Played played = createPlayed(game, game.getPlayer3Team1(), points);
+            playedRepository.save(played);
+        }
+        if (game.getPlayer4Team2() != 0) {
+            Played played = createPlayed(game, game.getPlayer4Team2(), points);
+            playedRepository.save(played);
+        }
+        return game;
+    }
 
-        if (game.getPlayTime() == null) {
-            if (game.getPlayer1Team1() != 0) {
+    private Played createPlayed(Game gameId,int userId, int points) {
+        Played played = new Played();
+        played.setUserID(userRepository.findById(userId));
+        played.setGameID(gameId);
+        played.setPoints(points);
+        return played;
+    }
 
-            }
-            if (game.getPlayer2Team2() != 0) {
-
-            }
-            if (game.getPlayer3Team1() != 0) {
-
-            }
-            if (game.getPlayer4Team2() != 0) {
-
+    private int getPoints(int minutes, int hour) {
+        int points = 0;
+        if (hour >= 1) {
+            points = 8;
+        } else {
+            if (minutes >= 15) {
+                points = 2;
+            } else if (minutes >= 30) {
+                points = 4;
+            } else if (minutes >= 45) {
+                points = 6;
             }
         }
-        return gameRepository.save(game);
+        return points;
     }
 }
