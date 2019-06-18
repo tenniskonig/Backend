@@ -24,8 +24,8 @@ public class PlayerTest extends BackendApplicationTests {
                 .then().statusCode(200);
     }
 
-    private String vorname = "Marvin";
-    private String nachname = "Kubik";
+    private String vorname = "Thomas";
+    private String nachname = "Diddel";
 
     @Test
     public void playerId() {
